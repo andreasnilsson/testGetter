@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class MainActivity extends ActionBarActivity {
 
-    private static final boolean USE_ARRAY = false;
+    private static final boolean USE_ARRAY = true;
     private TextView mResultText;
 
     public enum AccessType {
@@ -48,9 +48,9 @@ public class MainActivity extends ActionBarActivity {
         String result = "[";
         MyObject[] data = MyObject.createTestData(DATA_SIZE);
 
+        int sum = 0;
+        long start = System.nanoTime();
         for (int i = 0; i < N_LOOPS; i++) {
-            int sum = 0;
-            long start = System.nanoTime();
             for (int j = 0; j < DATA_SIZE; j++) {
 
                 if (USE_ARRAY) {
@@ -72,8 +72,6 @@ public class MainActivity extends ActionBarActivity {
                             break;
                     }
                 }
-
-
             }
 
             long dt = System.nanoTime() - start;
