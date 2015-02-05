@@ -14,7 +14,7 @@ public class MainActivity extends ActionBarActivity {
     private TextView mResultText;
 
     public enum AccessType {
-        DIRECT, GETTER
+        DIRECT, GETTER, GETTER_FINAL
     }
 
     private static final int DATA_SIZE = Integer.MAX_VALUE / 1024;
@@ -30,14 +30,27 @@ public class MainActivity extends ActionBarActivity {
         findViewById(R.id.startDirect).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.setEnabled(false);
                 startTest(AccessType.DIRECT);
+                v.setEnabled(true);
             }
         });
 
         findViewById(R.id.startGet).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                v.setEnabled(false);
                 startTest(AccessType.GETTER);
+                v.setEnabled(true);
+            }
+        });
+
+        findViewById(R.id.startGetFinal).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.setEnabled(false);
+                startTest(AccessType.GETTER_FINAL);
+                v.setEnabled(true);
             }
         });
 
@@ -61,6 +74,9 @@ public class MainActivity extends ActionBarActivity {
                         case GETTER:
                             sum += data[i].getData();
                             break;
+                        case GETTER_FINAL:
+                            sum += data[i].getDataFinal();
+                            break;
                     }
                 } else {
                     switch (accessType) {
@@ -69,6 +85,9 @@ public class MainActivity extends ActionBarActivity {
                             break;
                         case GETTER:
                             sum += localData.getData();
+                            break;
+                        case GETTER_FINAL:
+                            sum += localData.getDataFinal();
                             break;
                     }
                 }
